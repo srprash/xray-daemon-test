@@ -125,7 +125,7 @@ func getRegionFromECSMetadata() string {
 			} else {
 				taskArn = strings.Split(dat["TaskARN"].(string), ":")
 				region = taskArn[3]
-				log.Debugf("Fetch region %v from ECS metadata file", region)
+				log.Debugf("Fetched region %v from ECS metadata file", region)
 			}
 		}
 	}
@@ -141,10 +141,10 @@ func GetAWSConfigSession(cn connAttr, c *cfg.Config, roleArn string, region stri
 	regionEnv := os.Getenv("AWS_REGION")
 	if region == "" && regionEnv != "" {
 		awsRegion = regionEnv
-		log.Debugf("Fetch region %v from environment variables", awsRegion)
+		log.Debugf("Fetched region %v from environment variables", awsRegion)
 	} else if region != "" {
 		awsRegion = region
-		log.Debugf("Fetch region %v from commandline/config file", awsRegion)
+		log.Debugf("Fetched region %v from commandline/config file", awsRegion)
 	} else if !noMetadata {
 		awsRegion = getRegionFromECSMetadata()
 		if awsRegion == "" {
@@ -153,7 +153,7 @@ func GetAWSConfigSession(cn connAttr, c *cfg.Config, roleArn string, region stri
 			if err != nil {
 				log.Errorf("Unable to fetch region from EC2 metadata: %v\n", err)
 			} else {
-				log.Debugf("Fetch region %v from ec2 metadata", awsRegion)
+				log.Debugf("Fetched region %v from ec2 metadata", awsRegion)
 			}
 		}
 	} else {
