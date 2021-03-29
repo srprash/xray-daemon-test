@@ -5,9 +5,9 @@ echo "GPG signing for daemon assets"
 echo "****************************************"
 
 echo "Starting gpg signing for zip files"
-ls -l ${BGO_SPACE}/build/dist/
+ls -l build/dist/
 echo "***************"
-for filename in ${BGO_SPACE}/build/dist/*; do
+for filename in build/dist/*; do
   ext="${filename##*.}"
   if [ $ext == "zip" ]; then
     echo $filename
@@ -25,7 +25,7 @@ rm ~/.rpmmacros
 echo -e "%_signature gpg\n%_gpg_path ~/.gnupg\n%_gpg_name AWS X-Ray\n%_gpgbin /usr/bin/gpg" >> ~/.rpmmacros
 cat ~/.rpmmacros
 
-for filename in ${BGO_SPACE}/build/dist/*; do
+for filename in build/dist/*; do
   ext="${filename##*.}"
   if [ $ext == "rpm" ]; then
     rpmsign --addsign $filename
@@ -34,7 +34,7 @@ done
 echo "Finished GPG signing for rpm files"
 
 echo "Starting GPG signing for deb files"
-for filename in ${BGO_SPACE}/build/dist/*; do
+for filename in build/dist/*; do
   ext="${filename##*.}"
   if [ $ext == "deb" ]; then
     ar x $filename
