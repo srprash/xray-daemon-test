@@ -69,7 +69,11 @@ jobs:
 
       - name: Sign daemon packages
         if: ${{ runner.os == 'Linux' }}
-        run: ./Tool/src/packaging/sign-packages.sh
+        run: |
+          pwd
+          ls -l build/dist/
+          ./Tool/src/packaging/sign-packages.sh
+          ls -l build/dist/
 
       - name: Remove Package Signing GPG Key from local GPG Key Ring
         if: ${{ runner.os == 'Linux' }}
