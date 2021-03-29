@@ -5,9 +5,12 @@ echo "GPG signing for daemon assets"
 echo "****************************************"
 
 echo "Starting gpg signing for zip files"
+ls -l ${BGO_SPACE}/build/dist/
+echo "***************"
 for filename in ${BGO_SPACE}/build/dist/*; do
   ext="${filename##*.}"
   if [ $ext == "zip" ]; then
+    echo $filename
     gpg --output $filename.sig --detach-sig $filename
   fi
 done
